@@ -19,9 +19,9 @@ struct ContentView: View {
         Song(id: 1, name: "Mary On A Cross", artist: "Ghost", capa: "https://c-fa.cdn.smule.com/smule-gg-s-sf-bck1/arr/c3/a3/98a8980a-080e-47fd-b67c-580f8f8f2efd.jpg"),
         Song(id: 2, name: "Always", artist: "Bon Jovi", capa: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRjP6o9jYHgjGgJyzwO6VL0J1GY8f6r52RCAeXkuKwlZdS77WxtfsF2xmQmW-S_R0P6jQ&usqp=CAU"),
         Song(id: 3, name: "The Emptiness Machine", artist: "Linkin Park", capa: "https://m.media-amazon.com/images/I/81iC+O0ec2L._AC_SX679_.jpg"),
-        Song(id: 4, name: "Musica 4", artist: "LinkPark", capa: "https://m.media-amazon.com/images/I/81iC+O0ec2L._AC_SX679_.jpg"),
-        Song(id: 5, name: "Musica 5", artist: "LinkPark", capa: "https://m.media-amazon.com/images/I/81iC+O0ec2L._AC_SX679_.jpg"),
-        Song(id: 6, name: "Musica 6", artist: "LinkPark", capa: "https://m.media-amazon.com/images/I/81iC+O0ec2L._AC_SX679_.jpg")
+        Song(id: 4, name: "Locked Out The Heaven", artist: "Bruno Mars", capa: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYciLrat8EMeD7vhiNFaMglerHtikuWolHpRun64xmnONvSnROGolpzqmjxlhRzfYjoaY&usqp=CAU"),
+        Song(id: 5, name: "Numb", artist: "Linkin Park", capa: "https://m.media-amazon.com/images/I/81iC+O0ec2L._AC_SX679_.jpg"),
+        Song(id: 6, name: "In The End", artist: "Linkin Park", capa: "https://m.media-amazon.com/images/I/81iC+O0ec2L._AC_SX679_.jpg")
     ]
     
     var body: some View {
@@ -98,19 +98,26 @@ struct ContentView: View {
                             } // Fechamento do ForEach
                             
                         } // Fechamento do VStack
-                        Text("Sugestões")
+                        Text("Sugeridos")
                             .foregroundColor(.white)
                             .font(.system(size: 30))
                             .frame(maxWidth: .infinity, alignment: .leading)
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack (spacing: 20) {
                                 ForEach(ArrayMusicas) { musica in
-                                    AsyncImage(url: URL(string: musica.capa)) {image in image
-                                            .image?.resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
-                                            .clipped()
-                                    } // Fechamento do AysncImage
+                                    NavigationLink(destination: Visual(lista: musica)){
+                                        
+                                        VStack {
+                                            AsyncImage(url: URL(string: musica.capa)) {image in image
+                                                    .image?.resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+                                                    .clipped()
+                                            } // Fechamento do AysncImage
+                                            Text(musica.artist)
+                                                .foregroundColor(.white)
+                                        } // Fechamento do VStack
+                                    } // Fechamento do NavigationLink
                                 } // Fechamento do ForEach
                             } // Fechamento do HStack
                         } // Fechamento do ScrollView

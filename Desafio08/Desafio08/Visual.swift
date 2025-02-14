@@ -10,6 +10,7 @@ import SwiftUI
 struct Visual: View {
     
     @State var lista: Song
+    @State var tip: String = "play.fill"
     
     var body: some View {
         ZStack {
@@ -35,10 +36,18 @@ struct Visual: View {
                     Image(systemName: "backward.end.fill")
                         .foregroundColor(.white)
                         .font(.system(size: 40))
-
-                    Image(systemName: "play.fill")
-                        .foregroundColor(.white)
-                        .font(.system(size: 40))
+                    
+                    Button {
+                        if(tip == "play.fill") {
+                            tip = "pause.fill"
+                        } else {
+                            tip = "play.fill"
+                        }
+                    } label: {
+                        Image(systemName: tip)
+                            .foregroundColor(.white)
+                            .font(.system(size: 40))
+                    }
                     
                     Image(systemName: "forward.end.fill")
                         .foregroundColor(.white)
@@ -60,5 +69,5 @@ struct Visual: View {
 }
 
 #Preview {
-    Visual(lista: Song(id: 1, name: "Musica 1", artist: "LinkPark", capa: "https://m.media-amazon.com/images/I/81iC+O0ec2L._AC_SX679_.jpg"))
+    Visual(lista: Song(id: 1, name: "Numb", artist: "Linkin Park", capa: "https://m.media-amazon.com/images/I/81iC+O0ec2L._AC_SX679_.jpg"))
 }
